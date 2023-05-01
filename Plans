@@ -1,0 +1,5 @@
+Plans:
+	BASIC: https://discord.com/api/oauth2/authorize?client_id=1101506563958652988&permissions=1634235578432&scope=bot
+	    TOKEN: MTEwMTUwNjU2Mzk1ODY1Mjk4OA.G7cHf0.iUDhNjJ6qR_hmRzED47D-lGjh53bZjHj45Ig1I
+	ADMIN: https://discord.com/api/oauth2/authorize?client_id=1098945672075554828&permissions=8&scope=bot
+	    TOKEN: REDACTED
