@@ -83,10 +83,13 @@ def handle_response(message, username, guild, userID, isBot) -> str:
                         if bot.rpsModeOn == False:
                             bot.rpsModeOn = True
                             bot.rpsPlayer = username
+                            RPSresponse = RPS[random.randint(0, 2)].lower()
                             return 'So you wanna play? You bet! Just respond with !R, !P, or !S.'
                     case '!r':
                         if bot.rpsModeOn and username == bot.rpsPlayer:
                             RPSresponse = RPS[random.randint(0, 2)].lower()
+                            bot.rpsModeOn = False
+                            bot.rpsPlayer = ''
                             if RPSresponse == 'r':
                                 return ':rock:Tie! Try again!:rock:'
                             elif RPSresponse == 'p':
@@ -96,6 +99,8 @@ def handle_response(message, username, guild, userID, isBot) -> str:
                     case '!p':
                         if bot.rpsModeOn and username == bot.rpsPlayer:
                             RPSresponse = RPS[random.randint(0, 2)].lower()
+                            bot.rpsModeOn = False
+                            bot.rpsPlayer = ''
                             if RPSresponse == 'r':
                                 return ':rock:I lose... Too bad:rock:'
                             elif RPSresponse == 'p':
@@ -104,6 +109,8 @@ def handle_response(message, username, guild, userID, isBot) -> str:
                                 return ':scissors:I win! It seems like you have a skill issue.:scissors:'
                     case '!s':
                         if bot.rpsModeOn and username == bot.rpsPlayer:
+                            bot.rpsModeOn = False
+                            bot.rpsPlayer = ''
                             RPSresponse = RPS[random.randint(0, 2)].lower()
                             if RPSresponse == 'r':
                                 return ':rock:I win! It seems like you have a skill issue.:rock:'

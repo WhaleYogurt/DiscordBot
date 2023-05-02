@@ -75,3 +75,43 @@ test, WhaleYogurt#1896
 <@767128611970613288>  :game_die:
 **Result**: 1d20 (5)
 **Total**: 5, Avrae#6944
+!rps, WhaleYogurt#1896
+!R, WhaleYogurt#1896
+!RPS, clcskylands#1674
+!ros, clcskylands#1674
+!rps, clcskylands#1674
+!rps, clcskylands#1674
+!R, clcskylands#1674
+!rps, WhaleYogurt#1896
+!rps, clcskylands#1674
+!S, WhaleYogurt#1896
+!rps, clcskylands#1674
+!p, clcskylands#1674
+!r, clcskylands#1674
+<@871856753183178782>  :game_die:
+**Result**: 1d20 (10)
+**Total**: 10, Avrae#6944
+!rps, clcskylands#1674
+!r, clcskylands#1674
+<@871856753183178782>  :game_die:
+**Result**: 1d20 (14)
+**Total**: 14, Avrae#6944
+!failure, JonJon#2961
+!rps, WhaleYogurt#1896
+!s, WhaleYogurt#1896
+Error: skill is a required argument that is missing.
+Use `!help save` for help., Avrae#6944
+!rps, WhaleYogurt#1896
+!r, WhaleYogurt#1896
+<@767128611970613288>  :game_die:
+**Result**: 1d20 (9)
+**Total**: 9, Avrae#6944
+!rps, WhaleYogurt#1896
+!s, WhaleYogurt#1896
+Error: skill is a required argument that is missing.
+Use `!help save` for help., Avrae#6944
+!rps, WhaleYogurt#1896
+!r, WhaleYogurt#1896
+<@767128611970613288>  :game_die:
+**Result**: 1d20 (9)
+**Total**: 9, Avrae#6944
