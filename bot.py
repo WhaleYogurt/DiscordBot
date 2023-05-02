@@ -1,7 +1,7 @@
 import discord
 import responses
 
-with open('.log Files/Channels.log', 'r') as fh:
+with open('logFiles/Channels.log', 'r') as fh:
     channels = fh.read().split("\n")[0].replace(' ', '').split(':')[1].replace('>>>', ' ').split(',')
 
 async def send_message(message, is_private, toSendBack):
@@ -27,7 +27,7 @@ def run_discord_bot():
     @client.event
     async def on_message(message):
         try:
-            with open('.log Files/Channels.log', 'r') as fh:
+            with open('logFiles/Channels.log', 'r') as fh:
                 raw = fh.read()
 
             if message.author == client.user:

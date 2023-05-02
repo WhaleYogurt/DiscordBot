@@ -25,12 +25,12 @@ def saveAdmins(toSave):
     for admin in toLog.split(','):
         if admin != '':
             newLog += admin + ','
-    with open('.log Files/Admins.log', 'w') as fh:
+    with open('logFiles/Admins.log', 'w') as fh:
         fh.write(newLog[:len(newLog) - 1])
 
 
 def handle_response(message, username, guild, userID, isBot) -> str:
-    with open('.log Files/Admins.log', 'r') as fh:
+    with open('logFiles/Admins.log', 'r') as fh:
         admins = fh.read().replace("'", "").split(',')
     isLogging = 'TRUE'
     isAdmin = False
@@ -47,9 +47,9 @@ def handle_response(message, username, guild, userID, isBot) -> str:
             log.append(logHandle)
             p_message = message.lower()
             if isLogging == 'TRUE':
-                with open('.log Files/LoggedMSGs.csv', 'r') as fh:
+                with open('logFiles/LoggedMSGs.csv', 'r') as fh:
                     toWrite = fh.read() + '\n' + logHandle
-                with open('.log Files/LoggedMSGs.csv', 'w') as fh:
+                with open('logFiles/LoggedMSGs.csv', 'w') as fh:
                     fh.write(toWrite)
             chunks = p_message.split(' ')
             if message[0] == '!':
@@ -113,7 +113,7 @@ def handle_response(message, username, guild, userID, isBot) -> str:
                         case '>newchannel':
                             if len(chunks) > 1:
                                 bot.channels.append(message.split(" ")[1].lower())
-                                with open('.log Files/Channels.log', 'w') as fh:
+                                with open('logFiles/Channels.log', 'w') as fh:
                                     newLog = ''
                                     toLog = str(bot.channels).replace(']', '').replace('[', '').replace('"', '').replace("'",'').replace(', ', ',').replace(' ', '>>>')
                                     for admin in toLog.split(','):
@@ -131,7 +131,7 @@ def handle_response(message, username, guild, userID, isBot) -> str:
                                         bot.channels.remove(chunks[1])
                                     except:
                                         return 'THIS CHANNEL WAS ALREADY REMOVED'
-                                    with open('.log Files/Channels.log', 'w') as fh:
+                                    with open('logFiles/Channels.log', 'w') as fh:
                                         newLog = ''
                                         toLog = str(bot.channels).replace(']', '').replace('[', '').replace('"',
                                                                                                             '').replace("'",
