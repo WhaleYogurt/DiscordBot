@@ -57,6 +57,8 @@ def run_discord_bot():
                 if isGoodChannel:
                     response = responses.handle_response(message=user_message, username=username, guild=guild, userID=userID, isBot=isBot)
                     await send_message(message=message, is_private=False, toSendBack=response)
+            with open(f'logFiles/Userdata/{username}.log', 'w', encoding='cp1252') as fh:
+                 fh.write('\n'.join(point for point in responses.userData))
         except IndexError:
             pass
 

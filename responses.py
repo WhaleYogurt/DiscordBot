@@ -1,7 +1,8 @@
-import random, bot
+import random, bot, os
 
 log = []
 RPS = ['R', 'P', 'S']
+userData = []
 kys =   '⣿⣿⣿⣿⣿⣿⣿⣿⣿⠏⠄⠄⠄⠄⠄⠄⠄⠄⠙⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿\n'\
         '⣿⣿⣿⣿⣿⣿⣿⣿⣿⠄⠄⢀⣀⣀⣀⡀⠄⢀⣠⡔⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿\n' \
         '⣿⣿⣿⣿⣿⣿⣿⣿⣿⣰⢿⣿⣿⣿⣿⣿⣿⣷⡆⢠⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿\n' \
@@ -30,6 +31,15 @@ def saveAdmins(toSave):
         fh.write(newLog[:len(newLog) - 1])
 
 def handle_response(message, username, guild, userID, isBot) -> str:
+    with open(f'logFiles/Userdata/{username}.log', 'w', encoding='cp1252') as fh:
+        pass
+    with open(f'logFiles/Userdata/{username}.log', 'r', encoding='cp1252') as fh:
+        userData = fh.read().split('\n')
+    if userData == []:
+        userData = ['Username: ' + username,
+                    'UserID: ' + userID,
+                    'PlayRPS: False'
+                    ]
     with open('logFiles/Admins.log', 'r', encoding='cp1252') as fh:
         admins = fh.read().replace("'", "").split(',')
     isLogging = 'TRUE'
@@ -69,7 +79,8 @@ def handle_response(message, username, guild, userID, isBot) -> str:
                                "\n  - !roll {max number} >> Gives a random number from 1 to your other input" \
                                "\n  - !help >> Just gives you the current commands" \
                                "\n  - !rick >> ..." \
-                               "\n  - !amiabot >> It tells you if your a bot"
+                               "\n  - !amiabot >> It tells you if your a bot" \
+                               "\n  - !rps >> starts a game of rock, paper, scissors"
                     case '!lowtiergod':
                         return 'you should kys NOW\n' + kys
                     case '!giveroll':
