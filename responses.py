@@ -31,14 +31,6 @@ def saveAdmins(toSave):
         fh.write(newLog[:len(newLog) - 1])
 
 def handle_response(message, username, guild, userID, isBot) -> str:
-    temp = open(f'logFiles/Userdata/{username}.log', 'w', encoding='cp1252')
-    with open(f'logFiles/Userdata/{username}.log', 'r', encoding='cp1252') as fh:
-        userData = fh.read().split('\n')
-    if userData == []:
-        userData = ['Username: ' + username,
-                    'UserID: ' + userID,
-                    'PlayRPS: False'
-                    ]
     with open('logFiles/Admins.log', 'r', encoding='cp1252') as fh:
         admins = fh.read().replace("'", "").split(',')
     isLogging = 'TRUE'
