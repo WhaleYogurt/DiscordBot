@@ -1,6 +1,7 @@
 import random, bot
 
 log = []
+RPS = ['R', 'P', 'S']
 kys =   '⣿⣿⣿⣿⣿⣿⣿⣿⣿⠏⠄⠄⠄⠄⠄⠄⠄⠄⠙⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿\n'\
         '⣿⣿⣿⣿⣿⣿⣿⣿⣿⠄⠄⢀⣀⣀⣀⡀⠄⢀⣠⡔⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿\n' \
         '⣿⣿⣿⣿⣿⣿⣿⣿⣿⣰⢿⣿⣿⣿⣿⣿⣿⣷⡆⢠⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿\n' \
@@ -25,12 +26,11 @@ def saveAdmins(toSave):
     for admin in toLog.split(','):
         if admin != '':
             newLog += admin + ','
-    with open('logFiles/Admins.log', 'w', sep=";", encoding='cp1252') as fh:
+    with open('logFiles/Admins.log', 'w', encoding='cp1252') as fh:
         fh.write(newLog[:len(newLog) - 1])
 
-
 def handle_response(message, username, guild, userID, isBot) -> str:
-    with open('logFiles/Admins.log', 'r', sep=";", encoding='cp1252') as fh:
+    with open('logFiles/Admins.log', 'r', encoding='cp1252') as fh:
         admins = fh.read().replace("'", "").split(',')
     isLogging = 'TRUE'
     isAdmin = False
@@ -47,9 +47,9 @@ def handle_response(message, username, guild, userID, isBot) -> str:
             log.append(logHandle)
             p_message = message.lower()
             if isLogging == 'TRUE':
-                with open('logFiles/LoggedMSGs.csv', 'r', sep=";", encoding='cp1252') as fh:
+                with open('logFiles/LoggedMSGs.csv', 'r', encoding='cp1252') as fh:
                     toWrite = fh.read() + '\n' + logHandle
-                with open('logFiles/LoggedMSGs.csv', 'w', sep=";", encoding='cp1252') as fh:
+                with open('logFiles/LoggedMSGs.csv', 'w', encoding='cp1252') as fh:
                     fh.write(toWrite)
             chunks = p_message.split(' ')
             if message[0] == '!':
@@ -79,6 +79,39 @@ def handle_response(message, username, guild, userID, isBot) -> str:
                             return 'You are a bot! Beep Boop?'
                         else:
                             return 'You are indeed not a bot'
+                    case '!rps':
+                        if bot.rpsModeOn == False:
+                            bot.rpsModeOn = True
+                            bot.rpsPlayer = username
+                            return 'So you wanna play? You bet! Just respond with !R, !P, or !S.'
+                    case '!r':
+                        if bot.rpsModeOn and username == bot.rpsPlayer:
+                            RPSresponse = RPS[random.randint(0, 2)].lower()
+                            if RPSresponse == 'r':
+                                return ':rock:Tie! Try again!:rock:'
+                            elif RPSresponse == 'p':
+                                return ':scroll:I win! It seems like you have a skill issue.:scroll:'
+                            elif RPSresponse == 's':
+                                return ':scissors:I lose... Too bad:scissors:'
+                    case '!p':
+                        if bot.rpsModeOn and username == bot.rpsPlayer:
+                            RPSresponse = RPS[random.randint(0, 2)].lower()
+                            if RPSresponse == 'r':
+                                return ':rock:I lose... Too bad:rock:'
+                            elif RPSresponse == 'p':
+                                return ':scroll:Tie! Try again!:scroll:'
+                            elif RPSresponse == 's':
+                                return ':scissors:I win! It seems like you have a skill issue.:scissors:'
+                    case '!s':
+                        if bot.rpsModeOn and username == bot.rpsPlayer:
+                            RPSresponse = RPS[random.randint(0, 2)].lower()
+                            if RPSresponse == 'r':
+                                return ':rock:I win! It seems like you have a skill issue.:rock:'
+                            elif RPSresponse == 'p':
+                                return ':scroll:I lose... Too bad:scroll:'
+                            elif RPSresponse == 's':
+                                return ':scissors:Tie! Try again!:scissors:'
+                            username, bot.rpsModeOn = '', False
                     case _:
                         return None
             elif message[0] == '>':
@@ -113,7 +146,7 @@ def handle_response(message, username, guild, userID, isBot) -> str:
                         case '>newchannel':
                             if len(chunks) > 1:
                                 bot.channels.append(message.split(" ")[1].lower())
-                                with open('logFiles/Channels.log', 'w', sep=";", encoding='cp1252') as fh:
+                                with open('logFiles/Channels.log', 'w', encoding='cp1252') as fh:
                                     newLog = ''
                                     toLog = str(bot.channels).replace(']', '').replace('[', '').replace('"', '').replace("'",'').replace(', ', ',').replace(' ', '>>>')
                                     for admin in toLog.split(','):
@@ -131,7 +164,7 @@ def handle_response(message, username, guild, userID, isBot) -> str:
                                         bot.channels.remove(chunks[1])
                                     except:
                                         return 'THIS CHANNEL WAS ALREADY REMOVED'
-                                    with open('logFiles/Channels.log', 'w', sep=";", encoding='cp1252') as fh:
+                                    with open('logFiles/Channels.log', 'w', encoding='cp1252') as fh:
                                         newLog = ''
                                         toLog = str(bot.channels).replace(']', '').replace('[', '').replace('"',
                                                                                                             '').replace("'",

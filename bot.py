@@ -1,7 +1,7 @@
 import discord
 import responses
 
-with open('logFiles/Channels.log', 'r', sep=";", encoding='cp1252') as fh:
+with open('logFiles/Channels.log', 'r', encoding='cp1252') as fh:
     channels = fh.read().split("\n")[0].replace(' ', '').split(':')[1].replace('>>>', ' ').split(',')
 
 async def send_message(message, is_private, toSendBack):
@@ -10,6 +10,9 @@ async def send_message(message, is_private, toSendBack):
             await message.author.send(toSendBack) if is_private else await message.channel.send(toSendBack)
     except Exception as e:
         print(e)
+
+rpsModeOn = False
+rpsPlayer = ''
 
 def run_discord_bot():
     # Bot settings
@@ -27,7 +30,7 @@ def run_discord_bot():
     @client.event
     async def on_message(message):
         try:
-            with open('logFiles/Channels.log', 'r', sep=";", encoding='cp1252') as fh:
+            with open('logFiles/Channels.log', 'r', encoding='cp1252') as fh:
                 raw = fh.read()
 
             if message.author == client.user:
