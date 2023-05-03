@@ -202,7 +202,8 @@ def handle_response(message, username, guild, userID, isBot) -> str:
                         return 'COMMANDS: ' \
                                '\n  - #help >> returns current command list' \
                                "\n  - #taunt >> returns a funni gif of Italy's national bird" \
-                               "\n  - #ballin >> returns a picture of Luigi dunkin on u" 
+                               "\n  - #ballin >> returns a picture of Luigi dunkin on u" \
+                               "\n  - #yea >> YEAAAAAAAAAAAAAAAAAAAAAAH"
                                # "\n  - #newReaction {imageName}>> the next image sent will be added to a large selection of custom reaction images which you can access by saying #reaction {imageName}"
                     case '#taunt':
                         return 'SEND FILE: Images/Taunt.gif'
@@ -210,6 +211,8 @@ def handle_response(message, username, guild, userID, isBot) -> str:
                         return 'SEND FILE: Images/ballin.jpg'
                     case '#counter':
                         return 'SEND FILE: Images/counter.jpg'
+                    case '#yea':
+                        return 'https://tenor.com/view/kermit-frog-panic-frantic-yay-gif-16814992'
                     case '#newreaction':
                         if False:
                             if len(chunks) > 1:
