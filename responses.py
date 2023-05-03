@@ -61,7 +61,7 @@ def handle_response(message, username, guild, userID, isBot) -> str:
                                "\n  - !whaleyogurt >> returns my logo!" \
                                "\n  - !test >> returns my logo!"
                     case '!lowtiergod':
-                        return 'You serve no purpose!\n' + open('BrailArt/lowtiergod.brail', 'r', encoding='cp1252').read()
+                        return 'You serve no purpose!\n' + open('BrailArt/lowtiergod.brail', 'r', encoding='utf-8').read()
                     case '!giveroll':
                         return 'WORK IN PROGRESS'
                     case '!amiabot':
@@ -110,13 +110,13 @@ def handle_response(message, username, guild, userID, isBot) -> str:
                                 return ':scissors:Tie! Try again!:scissors:'
                             username, bot.rpsModeOn = '', False
                     case '!whale':
-                        with open('BrailArt/WhaleYogurt.brail', 'r', encoding='cp1252') as fh:
+                        with open('BrailArt/WhaleYogurt.brail', 'r', encoding='utf-8') as fh:
                             return fh.read()
                     case '!whaleyogurt':
-                        with open('BrailArt/WhaleYogurt.brail', 'r', encoding='cp1252') as fh:
+                        with open('BrailArt/WhaleYogurt.brail', 'r', encoding='utf-8') as fh:
                             return fh.read()
                     case '!test':
-                        with open('BrailArt/WhaleYogurt.brail', 'r', encoding='cp1252') as fh:
+                        with open('BrailArt/WhaleYogurt.brail', 'r', encoding='utf-8') as fh:
                             return fh.read()
                     case _:
                         return None
