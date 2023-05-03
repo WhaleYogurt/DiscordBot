@@ -3,6 +3,7 @@ import random, bot, os
 log = []
 RPS = ['R', 'P', 'S']
 userData = []
+reactionsSave = [[], []]
 
 def saveAdmins(toSave):
     toLog = ''
@@ -14,6 +15,34 @@ def saveAdmins(toSave):
             newLog += admin + ','
     with open('logFiles/Admins.log', 'w', encoding='cp1252') as fh:
         fh.write(newLog[:len(newLog) - 1])
+
+def newReaction(name, url):
+    with open('logFiles/reactions.log', 'r') as fh:
+        previous = fh.read()
+    reactions = previous.split("\n")
+    Found = False
+    for reaction in reactions:
+        if reaction != '':
+            reactionsSave[0].append(reaction.split(': ')[0])
+            reactionsSave[1].append(reaction.split(': ')[1])
+            if reaction.split(': ')[0] == name:
+                Found = True
+    if not Found:
+        with open('logFiles/reactions.log', 'w') as fh:
+            fh.write(previous + f'\n{name}: {url}')
+
+def loadReactions():
+    reactionsSave = [[], []]
+    with open('logFiles/reactions.log', 'r') as fh:
+        raw = fh.read()
+    reactions = raw.split('\n')
+    for reaction in reactions:
+        if reaction != '':
+            reactionsSave[0].append(reaction.split(': ')[0])
+            reactionsSave[1].append(reaction.split(': ')[1])
+    return reactionsSave
+
+loadReactions()
 
 def handle_response(message, username, guild, userID, isBot) -> str:
     with open('logFiles/Admins.log', 'r', encoding='cp1252') as fh:
@@ -203,7 +232,10 @@ def handle_response(message, username, guild, userID, isBot) -> str:
                                '\n  - #help >> returns current command list' \
                                "\n  - #taunt >> returns a funni gif of Italy's national bird" \
                                "\n  - #ballin >> returns a picture of Luigi dunkin on u" \
-                               "\n  - #yea >> YEAAAAAAAAAAAAAAAAAAAAAAH"
+                               "\n  - #yea >> YEAAAAAAAAAAAAAAAAAAAAAAH" \
+                               "\n  - #reactions >> gives list of custom reactions" \
+                               "\n  - #newReaction [types: url] [nameOfReaction] [reactionUrl] >> Creates a custom reaction!" \
+                               "\n  - #reaction or #react [reactionName] >> reaction image"
                                # "\n  - #newReaction {imageName}>> the next image sent will be added to a large selection of custom reaction images which you can access by saying #reaction {imageName}"
                     case '#taunt':
                         return 'SEND FILE: Images/Taunt.gif'
@@ -214,11 +246,40 @@ def handle_response(message, username, guild, userID, isBot) -> str:
                     case '#yea':
                         return 'https://tenor.com/view/kermit-frog-panic-frantic-yay-gif-16814992'
                     case '#newreaction':
-                        if False:
-                            if len(chunks) > 1:
-                                bot.reactionModeIsOn = True
-                                bot.reactionUser = username
-                                return 'NEW REACTION: ' + chunks[1] + '\nPlease send the reaction image to me'
+                        chunks[3] = rawChunks = message.split(' ')[3]
+                        print(chunks)
+                        if len(chunks) > 2:
+                            if chunks[1] == 'url' and len(chunks) > 3:
+                                newReaction(chunks[2], chunks[3])
+                                return 'NEW REACTION: ' + chunks[2] + '\n URL >> ' + chunks[3]
+                    case '#reaction':
+                        reactionsSave = loadReactions()
+                        if len(chunks) > 1:
+                            i = 0
+                            for name in reactionsSave[0]:
+                                if chunks[1] == name:
+                                    return reactionsSave[1][i]
+                                i += 1
+                            return 'REACTION NOT FOUND'
+                    case '#react':
+                        reactionsSave = loadReactions()
+                        if len(chunks) > 1:
+                            i = 0
+                            for name in reactionsSave[0]:
+                                if chunks[1] == name:
+                                    return reactionsSave[1][i]
+                                i += 1
+                            return 'REACTION NOT FOUND'
+                    case '#reactions':
+                        reactionsSave = loadReactions()
+                        toReturn = ''
+                        i = 0
+                        for name in reactionsSave[0]:
+                            toReturn += name + ': ' + reactionsSave[1][i] + '\n'
+                            i += 1
+                        return toReturn
+
+
         except UnicodeEncodeError:
             return None
     except Exception as e:
