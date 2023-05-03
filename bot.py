@@ -1,5 +1,6 @@
 import discord
 import responses
+from discord.utils import get
 
 with open('logFiles/Channels.log', 'r', encoding='cp1252') as fh:
     channels = fh.read().split("\n")[0].replace(' ', '').split(':')[1].replace('>>>', ' ').split(',')
@@ -13,6 +14,8 @@ async def send_message(message, is_private, toSendBack):
 
 rpsModeOn = False
 rpsPlayer = ''
+
+joinRoleName = 'Test'
 
 def run_discord_bot():
     # Bot settings
@@ -59,5 +62,11 @@ def run_discord_bot():
                     await send_message(message=message, is_private=False, toSendBack=response)
         except IndexError:
             pass
+
+    @client.event
+    async def on_member_join(member):
+        print(member, type(member))
+        role = get(member.guild.roles, name=joinRoleName)
+        await member.add_roles(role)
 
     client.run(TOKEN)
