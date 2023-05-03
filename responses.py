@@ -3,21 +3,6 @@ import random, bot, os
 log = []
 RPS = ['R', 'P', 'S']
 userData = []
-kys =   '⣿⣿⣿⣿⣿⣿⣿⣿⣿⠏⠄⠄⠄⠄⠄⠄⠄⠄⠙⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿\n'\
-        '⣿⣿⣿⣿⣿⣿⣿⣿⣿⠄⠄⢀⣀⣀⣀⡀⠄⢀⣠⡔⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿\n' \
-        '⣿⣿⣿⣿⣿⣿⣿⣿⣿⣰⢿⣿⣿⣿⣿⣿⣿⣷⡆⢠⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿\n' \
-        '⣿⣿⣿⣿⣿⣿⣿⣿⣿⡏⣻⣟⣿⣿⡿⣟⣛⣿⡃⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿\n' \
-        '⣿⣿⣿⣿⣿⣿⣿⣿⣧⣿⣾⣿⣷⣿⣷⣿⣿⣿⣷⣽⣹⣿⣿⣿⣿⣿⣿⣿⣿⣿\n' \
-        '⣿⣿⣿⣿⣿⣿⣿⣿⡟⣟⣿⣿⠺⣟⣻⣿⣿⣿⡏⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿\n' \
-        '⣿⣿⣿⣿⣿⣿⣿⣿⣿⢿⡝⠻⠵⠿⠿⢿⣿⣿⢳⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿\n' \
-        '⣿⣿⣿⣿⣿⣿⣿⣿⣿⣯⣧⠈⣛⣛⣿⣿⡿⣡⣞⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿\n' \
-        '⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡧⠄⠙⠛⠛⢁⣴⣿⣿⣷⣿⢿⣿⣿⣿⣿⣿⣿⣿⣿\n' \
-        '⣿⣿⣿⣿⣿⣿⡿⠟⠉⠄⠄⢠⠄⣀⣠⣾⣿⣿⡿⠟⠁⠄⠈⠛⢿⣿⣿⣿⣿⣿\n' \
-        '⣿⣿⣿⣿⡟⠉⠄⠄⢀⠠⠐⠒⠐⠾⠿⢟⠋⠁⠄⢀⣀⠠⠐⠄⠂⠈⠻⢿⣿⣿\n' \
-        '⣿⣿⣿⠋⠁⠄⢀⡈⠄⠄⠄⠄⠄⠄⠄⠄⠁⠒⠉⠄⢠⣶⠄⠄⠄⠄⠄⠈⠫⢿\n' \
-        '⣿⣿⡟⠄⢔⠆⡀⠄⠈⢀⠄⠄⠄⠄⠄⠄⠄⢄⡀⠄⠈⡐⢠⠒⠄⠄⠄⠄⢀⣂\n' \
-        '⣿⣿⠁⡀⠄⠄⢇⠄⠄⢈⠆⠄⠄⢀⠔⠉⠁⠉⠉⠣⣖⠉⡂⡔⠂⠄⢀⠔⠁⠄\n' \
-        '⣿⡿⠄⠄⠄⠄⢰⠹⣗⣺⠤⠄⠰⡎⠄⠄⠄⠄⠄⠄⠘⢯⡶⢟⡠⠰⠄⠄⠄⠄' \
 
 def saveAdmins(toSave):
     toLog = ''
@@ -71,9 +56,12 @@ def handle_response(message, username, guild, userID, isBot) -> str:
                                "\n  - !help >> Just gives you the current commands" \
                                "\n  - !rick >> ..." \
                                "\n  - !amiabot >> It tells you if your a bot" \
-                               "\n  - !rps >> starts a game of rock, paper, scissors"
+                               "\n  - !rps >> starts a game of rock, paper, scissors" \
+                               "\n  - !whale >> returns my logo!" \
+                               "\n  - !whaleyogurt >> returns my logo!" \
+                               "\n  - !test >> returns my logo!"
                     case '!lowtiergod':
-                        return 'you should kys NOW\n' + kys
+                        return 'You serve no purpose!\n' + open('BrailArt/lowtiergod.brail', 'r', encoding='cp1252').read()
                     case '!giveroll':
                         return 'WORK IN PROGRESS'
                     case '!amiabot':
@@ -121,6 +109,15 @@ def handle_response(message, username, guild, userID, isBot) -> str:
                             elif RPSresponse == 's':
                                 return ':scissors:Tie! Try again!:scissors:'
                             username, bot.rpsModeOn = '', False
+                    case '!whale':
+                        with open('BrailArt/WhaleYogurt.brail', 'r', encoding='cp1252') as fh:
+                            return fh.read()
+                    case '!whaleyogurt':
+                        with open('BrailArt/WhaleYogurt.brail', 'r', encoding='cp1252') as fh:
+                            return fh.read()
+                    case '!test':
+                        with open('BrailArt/WhaleYogurt.brail', 'r', encoding='cp1252') as fh:
+                            return fh.read()
                     case _:
                         return None
             elif message[0] == '>':
