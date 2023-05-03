@@ -208,6 +208,8 @@ def handle_response(message, username, guild, userID, isBot) -> str:
                         return 'SEND FILE: Images/Taunt.gif'
                     case '#ballin':
                         return 'SEND FILE: Images/ballin.jpg'
+                    case '#counter':
+                        return 'SEND FILE: Images/counter.jpg'
                     case '#newreaction':
                         if len(chunks) > 1:
                             bot.reactionModeIsOn = True
