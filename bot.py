@@ -6,13 +6,15 @@ with open('logFiles/Channels.log', 'r', encoding='cp1252') as fh:
     channels = fh.read().split("\n")[0].replace(' ', '').split(':')[1].replace('>>>', ' ').split(',')
 
 async def send_message(message, is_private, toSendBack):
-    if message[0:8] == 'SEND FILE':
-        print(message[9:len(message)-1])
-    try:
-        if toSendBack is not None and toSendBack is not Exception:
-            await message.author.send(toSendBack) if is_private else await message.channel.send(toSendBack)
-    except Exception as e:
-        print(e)
+    if str(toSendBack)[0:9] == 'SEND FILE':
+        filePath = toSendBack[11:len(toSendBack)]
+        await message.channel.send(file=discord.File(filePath))
+    else:
+        try:
+            if toSendBack is not None and toSendBack is not Exception:
+                await message.author.send(toSendBack) if is_private else await message.channel.send(toSendBack)
+        except Exception as e:
+            print(e)
 
 rpsModeOn = False
 rpsPlayer = ''

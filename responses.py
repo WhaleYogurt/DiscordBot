@@ -198,8 +198,12 @@ def handle_response(message, username, guild, userID, isBot) -> str:
                             return None
             elif message[0] == '#':
                 match chunks[0]:
+                    case '#help':
+                        return 'COMMANDS: ' \
+                               '\n  - #help >> returns current command list' \
+                               "\n  - #taunt >> returns a funni gif of Italy's national bird"
                     case '#taunt':
-                        return 'SEND FILE: TEST'
+                        return 'SEND FILE: Images/Taunt.gif'
         except UnicodeEncodeError:
             return None
     except Exception as e:
