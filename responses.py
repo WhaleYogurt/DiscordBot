@@ -199,9 +199,7 @@ def handle_response(message, username, guild, userID, isBot) -> str:
             elif message[0] == '#':
                 match chunks[0]:
                     case '#taunt':
-                        return 'SEND IMG: TEST'
-
-
+                        return 'SEND FILE: TEST'
         except UnicodeEncodeError:
             return None
     except Exception as e:
