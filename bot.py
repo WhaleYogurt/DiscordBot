@@ -5,6 +5,9 @@ from discord.utils import get
 with open('logFiles/Channels.log', 'r', encoding='cp1252') as fh:
     channels = fh.read().split("\n")[0].replace(' ', '').split(':')[1].replace('>>>', ' ').split(',')
 
+reactionModeIsOn = False
+reactionUser = ''
+
 async def send_message(message, is_private, toSendBack):
     if str(toSendBack)[0:9] == 'SEND FILE':
         filePath = toSendBack[11:len(toSendBack)]

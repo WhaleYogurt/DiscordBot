@@ -28,14 +28,17 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/willy/OneDrive - Maclay School/Documents/GitHub/WhaleYogurt.github.io/DiscordBot/test.py&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "C:/Users/willy/OneDrive - Maclay School/Documents/GitHub/DiscordBot/Images"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\willy\OneDrive - Maclay School\Documents\GitHub\DiscordBot\Images" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\willy\OneDrive - Maclay School\Documents\GitHub\DiscordBot\Images" />
     </key>

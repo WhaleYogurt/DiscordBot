@@ -201,9 +201,18 @@ def handle_response(message, username, guild, userID, isBot) -> str:
                     case '#help':
                         return 'COMMANDS: ' \
                                '\n  - #help >> returns current command list' \
-                               "\n  - #taunt >> returns a funni gif of Italy's national bird"
+                               "\n  - #taunt >> returns a funni gif of Italy's national bird" \
+                               "\n  - #ballin >> returns a picture of Luigi dunkin on u" \
+                               "\n  - #newReaction {imageName}>> the next image sent will be added to a large selection of custom reaction images which you can access by saying #reaction {imageName}"
                     case '#taunt':
                         return 'SEND FILE: Images/Taunt.gif'
+                    case '#ballin':
+                        return 'SEND FILE: Images/ballin.jpg'
+                    case '#newreaction':
+                        if len(chunks) > 1:
+                            bot.reactionModeIsOn = True
+                            bot.reactionUser = username
+                            return 'NEW REACTION: ' + chunks[1] + '\nPlease send the reaction image to me'
         except UnicodeEncodeError:
             return None
     except Exception as e:
