@@ -286,8 +286,6 @@ def handle_response(message, username, guild, userID, isBot) -> str:
                                 return reactionsSave[1][i]
                             i += 1
                         return 'THIS COMMANDD DOES NOT EXIST PLEASE USE #help'
-
-
         except UnicodeEncodeError:
             return None
     except Exception as e:
