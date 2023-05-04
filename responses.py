@@ -279,8 +279,9 @@ def handle_response(message, username, guild, userID, isBot) -> str:
                         reactionsSave = loadReactions()
                         i = 0
                         for name in reactionsSave[0]:
-                           if chunks[0] == "#"+name:
+                            if chunks[0] == "#"+name:
                                 return reactionsSave[1][i]
+                            print(chunks[0] == "#"+name, chunks[0], name)
                         i += 1
                         return 'THIS COMMANDD DOES NOT EXIST PLEASE USE #help'
 
