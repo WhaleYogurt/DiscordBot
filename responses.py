@@ -201,7 +201,10 @@ def handle_response(message, username, guild, userID, isBot) -> str:
                                         return 'THIS CHANNEL WAS ALREADY REMOVED'
                                     with open('logFiles/Channels.log', 'w', encoding='cp1252') as fh:
                                         newLog = ''
-                                        toLog = str(bot.channels).replace(']', '').replace('[', '').replace('"','').replace("'", '').replace(', ', ',').replace(' ', '>>>')
+                                        toLog = str(bot.channels).replace(']', '').replace('[', '').replace('"',
+                                                                                                            '').replace("'",
+                                                                                                                        '').replace(
+                                            ', ', ',').replace(' ', '>>>')
                                         for admin in toLog.split(','):
                                             if admin != '':
                                                 newLog += admin + ','
@@ -281,8 +284,7 @@ def handle_response(message, username, guild, userID, isBot) -> str:
                         for name in reactionsSave[0]:
                             if chunks[0] == "#"+name:
                                 return reactionsSave[1][i]
-                            print(chunks[0] == "#"+name, chunks[0], name)
-                        i += 1
+                            i += 1
                         return 'THIS COMMANDD DOES NOT EXIST PLEASE USE #help'
 
 
