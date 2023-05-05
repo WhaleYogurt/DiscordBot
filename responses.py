@@ -44,7 +44,7 @@ def loadReactions():
 
 loadReactions()
 
-def handle_response(message, username, guild, userID, isBot) -> str:
+def handle_response(message, username, guild, userID, isBot, messageHandle) -> str:
     with open('logFiles/Admins.log', 'r', encoding='cp1252') as fh:
         admins = fh.read().replace("'", "").split(',')
     isLogging = 'TRUE'
@@ -246,12 +246,18 @@ def handle_response(message, username, guild, userID, isBot) -> str:
                     case '#yea':
                         return 'https://tenor.com/view/kermit-frog-panic-frantic-yay-gif-16814992'
                     case '#newreaction':
-                        chunks[3] = rawChunks = message.split(' ')[3]
+                        chunks[3] = message.split(' ')[3]
                         print(chunks)
-                        if len(chunks) > 2:
-                            if chunks[1] == 'url' and len(chunks) > 3:
+                        if len(chunks) > 3:
+                            if chunks[1] == 'url' and len(chunks) == 4:
                                 newReaction(chunks[2], chunks[3])
                                 return 'NEW REACTION: ' + chunks[2] + '\n URL >> ' + chunks[3]
+                            elif chunks[1] == 'img' or chunks[1] == 'image':
+                                imgPath = bot.saveImage(messageHandle, chunks[2])
+                                if imgPath != None:
+                                    newReaction(chunks[2], 'SEND FILE: ' + imgPath)
+                            else:
+                                return 'FORMATTING ERROR USE #help'
                     case '#reaction':
                         reactionsSave = loadReactions()
                         if len(chunks) > 1:
