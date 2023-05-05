@@ -1,4 +1,7 @@
+import shutil
+import uuid
 import discord
+import requests
 import responses
 from discord.utils import get
 
@@ -53,6 +56,18 @@ def run_discord_bot():
             user_message = str(message.content)
             channel = str(message.channel.name)
             isBot = bool(message.author.bot)
+
+            try:
+                url = message.attachments[0].url
+            except IndexError:
+                url = None
+            else:
+                if url[0:26] == "https://cdn.discordapp.com":  # look to see if url is from discord
+                    r = requests.get(url, stream=True)
+                    imageName = str(uuid.uuid4()) + '.ico'  # uuid creates random unique id to use for image names
+                    with open(imageName, 'wb') as out_file:
+                        print('Saving image: ' + imageName)
+                        shutil.copyfileobj(r.raw, out_file)
 
             if user_message[0] == '?': # Is this a private message?
                 user_message = user_message[1:]
