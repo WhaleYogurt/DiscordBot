@@ -1,5 +1,4 @@
 import shutil
-import uuid
 import discord
 import requests
 import responses
@@ -11,6 +10,7 @@ with open('logFiles/Channels.log', 'r', encoding='cp1252') as fh:
 reactionModeIsOn = False
 reactionUser = ''
 
+
 async def send_message(message, is_private, toSendBack):
     if str(toSendBack)[0:9] == 'SEND FILE':
         filePath = toSendBack[11:len(toSendBack)]
@@ -21,6 +21,8 @@ async def send_message(message, is_private, toSendBack):
                 await message.author.send(toSendBack) if is_private else await message.channel.send(toSendBack)
         except Exception as e:
             print(e)
+
+
 def saveImage(message, imgName):
     try:
         url = message.attachments[0].url
@@ -29,11 +31,12 @@ def saveImage(message, imgName):
     else:
         if url[0:26] == "https://cdn.discordapp.com":  # look to see if url is from discord
             r = requests.get(url, stream=True)
-            imageName = 'Reactions/' + imgName + url.split('.')[len(url.split('.'))-1]# uuid creates random unique id to use for image names
+            imageName = 'Reactions/' + imgName + url.split('.')[
+                len(url.split('.')) - 1]  # uuid creates random unique id to use for image names
             with open(imageName, 'wb') as out_file:
                 print('Saving image: ' + imageName)
                 shutil.copyfileobj(r.raw, out_file)
-        return 'Reactions/' + imgName + url.split('.')[len(url.split('.'))-1]
+        return 'Reactions/' + imgName + url.split('.')[len(url.split('.')) - 1]
     return None
 
 
@@ -41,6 +44,7 @@ rpsModeOn = False
 rpsPlayer = ''
 
 joinRoleName = 'Test'
+
 
 def run_discord_bot():
     # Bot settings
@@ -72,9 +76,10 @@ def run_discord_bot():
             channel = str(message.channel.name)
             isBot = bool(message.author.bot)
 
-            if user_message[0] == '?': # Is this a private message?
+            if user_message[0] == '?':  # Is this a private message?
                 user_message = user_message[1:]
-                response = responses.handle_response(message=user_message, username=username, guild=guild, userID=userID, isBot=isBot, messageHandle = message)
+                response = responses.handle_response(message=user_message, username=username, guild=guild,
+                                                     userID=userID, isBot=isBot, messageHandle=message)
                 await send_message(message=message, is_private=True, toSendBack=response)
             else:
                 # Am I allowed to use this channel?
@@ -83,7 +88,8 @@ def run_discord_bot():
                     if channel == chan:
                         isGoodChannel = True
                 if isGoodChannel:
-                    response = responses.handle_response(message=user_message, username=username, guild=guild, userID=userID, isBot=isBot, messageHandle = message)
+                    response = responses.handle_response(message=user_message, username=username, guild=guild,
+                                                         userID=userID, isBot=isBot, messageHandle=message)
                     await send_message(message=message, is_private=False, toSendBack=response)
         except IndexError:
             pass

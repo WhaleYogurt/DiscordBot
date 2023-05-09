@@ -1,4 +1,4 @@
-import random, bot, os
+import random, bot
 
 log = []
 RPS = ['R', 'P', 'S']
@@ -99,10 +99,9 @@ def handle_response(message, username, guild, userID, isBot, messageHandle) -> s
                         else:
                             return 'You are indeed not a bot'
                     case '!rps':
-                        if bot.rpsModeOn == False:
+                        if not bot.rpsModeOn:
                             bot.rpsModeOn = True
                             bot.rpsPlayer = username
-                            RPSresponse = RPS[random.randint(0, 2)].lower()
                             return 'So you wanna play? You bet! Just respond with !R, !P, or !S.'
                     case '!r':
                         if bot.rpsModeOn and username == bot.rpsPlayer:
@@ -183,7 +182,7 @@ def handle_response(message, username, guild, userID, isBot, messageHandle) -> s
                                 bot.channels.append(message.split(" ")[1].lower())
                                 with open('logFiles/Channels.log', 'w', encoding='cp1252') as fh:
                                     newLog = ''
-                                    toLog = str(bot.channels).replace(']', '').replace('[', '').replace('"', '').replace("'",'').replace(', ', ',').replace(' ', '>>>')
+                                    toLog = str(bot.channels).replace(']', '').replace('[', '').replace('"', '').replace("'", '').replace(', ', ',').replace(' ', '>>>')
                                     for admin in toLog.split(','):
                                         if admin != '':
                                             newLog += admin + ','
@@ -197,7 +196,7 @@ def handle_response(message, username, guild, userID, isBot, messageHandle) -> s
                                 if len(chunks) > 1:
                                     try:
                                         bot.channels.remove(chunks[1])
-                                    except:
+                                    except ValueError:
                                         return 'THIS CHANNEL WAS ALREADY REMOVED'
                                     with open('logFiles/Channels.log', 'w', encoding='cp1252') as fh:
                                         newLog = ''
@@ -236,7 +235,6 @@ def handle_response(message, username, guild, userID, isBot, messageHandle) -> s
                                "\n  - #reactions >> gives list of custom reactions" \
                                "\n  - #newReaction [types: url] [nameOfReaction] [reactionUrl] >> Creates a custom reaction!" \
                                "\n  - #reaction or #react [reactionName] >> reaction image"
-                               # "\n  - #newReaction {imageName}>> the next image sent will be added to a large selection of custom reaction images which you can access by saying #reaction {imageName}"
                     case '#taunt':
                         return 'SEND FILE: Images/Taunt.gif'
                     case '#ballin':
@@ -254,7 +252,7 @@ def handle_response(message, username, guild, userID, isBot, messageHandle) -> s
                                 return 'NEW REACTION: ' + chunks[2] + '\n URL >> ' + chunks[3]
                             elif chunks[1] == 'img' or chunks[1] == 'image':
                                 imgPath = bot.saveImage(messageHandle, chunks[2])
-                                if imgPath != None:
+                                if imgPath is not None:
                                     newReaction(chunks[2], 'SEND FILE: ' + imgPath)
                             else:
                                 return 'FORMATTING ERROR USE #help'
@@ -292,6 +290,10 @@ def handle_response(message, username, guild, userID, isBot, messageHandle) -> s
                                 return reactionsSave[1][i]
                             i += 1
                         return 'THIS COMMANDD DOES NOT EXIST PLEASE USE #help'
+            elif message[0] == '|':
+                match chunks[0]:
+                    case '|help':
+                        return 'TEST'
         except UnicodeEncodeError:
             return None
     except Exception as e:
