@@ -294,6 +294,14 @@ def handle_response(message, username, guild, userID, isBot, messageHandle) -> s
                 match chunks[0]:
                     case '|help':
                         return 'TEST'
+                    case '|newbrail':
+                        brailArt = ''
+                        print(chunks[1], chunks[2:len(chunks)-1])
+                        if False:
+                            for brailChunk in chunks[2:len(chunks)-1]:
+                                brailArt += brailChunk
+                            with open(f'BrailArt/{chunks[1]}.brail', 'w') as fh:
+                                fh.write(brailArt)
         except UnicodeEncodeError:
             return None
     except Exception as e:

@@ -6,11 +6,8 @@ from discord.utils import get
 
 with open('logFiles/Channels.log', 'r', encoding='cp1252') as fh:
     channels = fh.read().split("\n")[0].replace(' ', '').split(':')[1].replace('>>>', ' ').split(',')
-
 reactionModeIsOn = False
 reactionUser = ''
-
-
 async def send_message(message, is_private, toSendBack):
     if str(toSendBack)[0:9] == 'SEND FILE':
         filePath = toSendBack[11:len(toSendBack)]
@@ -21,8 +18,6 @@ async def send_message(message, is_private, toSendBack):
                 await message.author.send(toSendBack) if is_private else await message.channel.send(toSendBack)
         except Exception as e:
             print(e)
-
-
 def saveImage(message, imgName):
     try:
         url = message.attachments[0].url
@@ -39,12 +34,9 @@ def saveImage(message, imgName):
         return 'Reactions/' + imgName + url.split('.')[len(url.split('.')) - 1]
     return None
 
-
 rpsModeOn = False
 rpsPlayer = ''
-
 joinRoleName = 'Test'
-
 
 def run_discord_bot():
     # Bot settings
