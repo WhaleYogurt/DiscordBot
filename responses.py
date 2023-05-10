@@ -249,7 +249,7 @@ def handle_response(message, username, guild, userID, isBot, messageHandle) -> s
                             if chunks[1] == 'url' and len(chunks) == 4:
                                 newReaction(chunks[2], chunks[3])
                                 return 'NEW REACTION: ' + chunks[2] + '\n URL >> ' + chunks[3]
-                            elif (chunks[1] == 'yt' or chunks[1] == 'youtube') and len(chunks) == 4:
+                            elif chunks[1] == 'yt' or chunks[1] == 'youtube':
                                 name = chunks[2]
                                 type = chunks[3]
                                 ytLink = chunks[4]
