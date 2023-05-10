@@ -265,7 +265,7 @@ def handle_response(message, username, guild, userID, isBot, messageHandle) -> s
                                         newReaction(name, f'SEND FILE: Downloads/{name}.mp4')
                                 return f'SEND FILE: Downloads/{name}.mp4'
                             else:
-                                return 'FORMATTING ERROR USE #help'
+                                return f'FORMATTING ERROR USE #help\n{chunks}'
                     case '#reaction':
                         reactionsSave = loadReactions()
                         if len(chunks) > 1:
