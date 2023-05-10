@@ -290,32 +290,6 @@ def handle_response(message, username, guild, userID, isBot, messageHandle) -> s
                                 return reactionsSave[1][i]
                             i += 1
                         return 'THIS COMMANDD DOES NOT EXIST PLEASE USE #help'
-            elif message[0] == '|':
-                match chunks[0]:
-                    case '|help':
-                        return 'COMMANDS: ' \
-                               '\n  - |newBrail {brailName} [brailArt] >> creates a new brail art' \
-                               '\n     - EX: |newBrail test [⠀⠀⠀⠀⠀⠀⣠⣶⣿⣿⣶⣤⠀⠀⠀⠀⠀' \
-                               '\n                           ⠀⠀⠀⠀⠀⣸⣿⠟⣋⠙⠻⣿⣇⠀⠀⠀⠀' \
-                               '\n                           ⠀⠀⠀⠀⠀⢿⡿⢎⡤⢰⡦⠼⣿⡄⠀⠀⠀' \
-                               '\n                           ⠀⠀⠀⠀⢀⡿⣀⠣⡜⡈⠉⠉⢿⠀⠀⠀⠀' \
-                               '\n                           ⠀⠀⠀⠀⠀⠐⢣⠿⠿⡯⠙⠖⠋⠀⠀⠀⠀' \
-                               '\n                           ⠀⠀⠀⠀⠀⠀⢀⣯⣦⣇⡼⠁⠀⠀⠀⠀⠀' \
-                               '\n                          ⠀⠀⠀⣠⣴⣾⣧⠘⡷⡃⠄⣰⣶⣄⡀⠀⠀' \
-                               '\n                          ⢀⣴⣿⣿⣿⣿⣿⣿⣴⣽⣼⣿⣿⣿⣿⣷⣄]' \
-                               '\n  - |help >> lists all commands'
-                    case '|newbrail':
-                        brailArt = ''
-                        if len(chunks) > 1:
-                            print(chunks[1], chunks[2:len(chunks)-1])
-                            brailArt = p_message.split('[')[1]
-                            with open(f'BrailArt/{chunks[1]}.brail', 'w') as fh:
-                                fh.write(brailArt)
-                    case _:
-                        for brailArt in os.listdir('BrailArt'):
-                            if brailArt.split('.')[0] == chunks[0]:
-                                with open(brailArt, 'r') as fh:
-                                    return fh.read()
         except UnicodeEncodeError:
             return None
     except Exception as e:
