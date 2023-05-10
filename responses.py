@@ -1,4 +1,4 @@
-import random, bot, os
+import random, bot, os, pytubeDownloader
 
 log = []
 RPS = ['R', 'P', 'S']
@@ -233,7 +233,7 @@ def handle_response(message, username, guild, userID, isBot, messageHandle) -> s
                                "\n  - #ballin >> returns a picture of Luigi dunkin on u" \
                                "\n  - #yea >> YEAAAAAAAAAAAAAAAAAAAAAAH" \
                                "\n  - #reactions >> gives list of custom reactions" \
-                               "\n  - #newReaction [types: url] [nameOfReaction] [reactionUrl] >> Creates a custom reaction!" \
+                               "\n  - #newReaction [types: url, youtube] [nameOfReaction] {if using youtube enter audioOnly, videoOnly, or both} [reactionUrl] >> Creates a custom reaction!" \
                                "\n  - #reaction or #react [reactionName] >> reaction image"
                     case '#taunt':
                         return 'SEND FILE: Images/Taunt.gif'
@@ -245,15 +245,25 @@ def handle_response(message, username, guild, userID, isBot, messageHandle) -> s
                         return 'https://tenor.com/view/kermit-frog-panic-frantic-yay-gif-16814992'
                     case '#newreaction':
                         chunks[3] = message.split(' ')[3]
-                        print(chunks)
                         if len(chunks) > 3:
                             if chunks[1] == 'url' and len(chunks) == 4:
                                 newReaction(chunks[2], chunks[3])
                                 return 'NEW REACTION: ' + chunks[2] + '\n URL >> ' + chunks[3]
-                            elif chunks[1] == 'img' or chunks[1] == 'image':
-                                imgPath = bot.saveImage(messageHandle, chunks[2])
-                                if imgPath is not None:
-                                    newReaction(chunks[2], 'SEND FILE: ' + imgPath)
+                            elif (chunks[1] == 'yt' or chunks[1] == 'youtube') and len(chunks) == 4:
+                                name = chunks[2]
+                                type = chunks[3]
+                                ytLink = chunks[4]
+                                match type:
+                                    case 'audioonly':
+                                        pytubeDownloader.DownloadOnlyAudio(ytLink, name+'.mp4')
+                                        newReaction(name, f'SEND FILE: Downloads/{name}.mp4')
+                                    case 'videoonly':
+                                        pytubeDownloader.DownloadOnlyVideo(ytLink, name+'.mp4')
+                                        newReaction(name, f'SEND FILE: Downloads/{name}.mp4')
+                                    case 'both':
+                                        pytubeDownloader.DownloadVidAndAudio(ytLink, name+'.mp4')
+                                        newReaction(name, f'SEND FILE: Downloads/{name}.mp4')
+                                return f'SEND FILE: Downloads/{name}.mp4'
                             else:
                                 return 'FORMATTING ERROR USE #help'
                     case '#reaction':
