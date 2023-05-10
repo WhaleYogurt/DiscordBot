@@ -1,4 +1,4 @@
-import random, bot
+import random, bot, os
 
 log = []
 RPS = ['R', 'P', 'S']
@@ -296,12 +296,15 @@ def handle_response(message, username, guild, userID, isBot, messageHandle) -> s
                         return 'TEST'
                     case '|newbrail':
                         brailArt = ''
-                        print(chunks[1], chunks[2:len(chunks)-1])
-                        if False:
+                        if len(chunks) > 1:
+                            print(chunks[1], chunks[2:len(chunks)-1])
                             for brailChunk in chunks[2:len(chunks)-1]:
                                 brailArt += brailChunk
                             with open(f'BrailArt/{chunks[1]}.brail', 'w') as fh:
                                 fh.write(brailArt)
+                    case _:
+                        for brailArt in os.listdir('BrailArt'):
+                            print(brailArt)
         except UnicodeEncodeError:
             return None
     except Exception as e:
