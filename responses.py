@@ -137,16 +137,9 @@ def handle_response(message, username, guild, userID, isBot, messageHandle) -> s
                             elif RPSresponse == 's':
                                 return ':scissors:Tie! Try again!:scissors:'
                             username, bot.rpsModeOn = '', False
-                    case '!whale':
-                        with open('BrailArt/WhaleYogurt.brail', 'r', encoding='utf-8') as fh:
-                            return fh.read()
-                    case '!whaleyogurt':
-                        with open('BrailArt/WhaleYogurt.brail', 'r', encoding='utf-8') as fh:
-                            return fh.read()
-                    case '!test':
-                        with open('BrailArt/WhaleYogurt.brail', 'r', encoding='utf-8') as fh:
-                            return fh.read()
                     case _:
+                        if chunks[0] == '!whale' or chunks[0] == '!whaleyogurt' or chunks[0] == '!test':
+                            return open('BrailArt/WhaleYogurt.brail', 'r', encoding='utf-8').read()
                         return None
             elif message[0] == '>':
                 if isAdmin:
