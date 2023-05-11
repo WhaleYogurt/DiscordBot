@@ -253,15 +253,16 @@ def handle_response(message, username, guild, userID, isBot, messageHandle) -> s
                                 name = chunks[2]
                                 type = chunks[3]
                                 ytLink = chunks[4]
+                                print(name, type, ytLink)
                                 match type:
                                     case 'audioonly':
-                                        pytubeDownloader.DownloadOnlyAudio(ytLink, name+'.mp4')
+                                        pytubeDownloader.DownloadOnlyAudio(ytLink, name)
                                         newReaction(name, f'SEND FILE: Downloads/{name}.mp4')
                                     case 'videoonly':
-                                        pytubeDownloader.DownloadOnlyVideo(ytLink, name+'.mp4')
+                                        pytubeDownloader.DownloadOnlyVideo(ytLink, name)
                                         newReaction(name, f'SEND FILE: Downloads/{name}.mp4')
                                     case 'both':
-                                        pytubeDownloader.DownloadVidAndAudio(ytLink, name+'.mp4')
+                                        pytubeDownloader.DownloadVidAndAudio(ytLink, name)
                                         newReaction(name, f'SEND FILE: Downloads/{name}.mp4')
                                 return f'SEND FILE: Downloads/{name}.mp4'
                             else:
