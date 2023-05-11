@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6e69fc4c-a7b9-42d0-a41f-93e4093740fb" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-    </list>
+    <list default="true" id="6e69fc4c-a7b9-42d0-a41f-93e4093740fb" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -37,12 +35,13 @@
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/willy/OneDrive - Maclay School/Documents/GitHub/DiscordBot/Images&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/willy/Desktop/GitHub/DiscordBot&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\willy\Desktop\GitHub\DiscordBot" />
       <recent name="C:\Users\willy\OneDrive - Maclay School\Documents\GitHub\DiscordBot\Images" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
